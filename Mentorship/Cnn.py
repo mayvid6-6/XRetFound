@@ -15,7 +15,7 @@ from tensorflow.keras.applications.vgg16 import preprocess_input #Preprocess ima
 image_titles = ['Goldfish', 'Bear', 'Assault rifle', 'Husky'] # Headings for each image
 
 # Load images and Convert them to a Numpy array
-img1, img2, img3, img4  = load_img('images/goldfish.jpg', target_size=(224, 224)), load_img('images/bear.jpg', target_size=(224, 224)), load_img('images/soldiers.jpg', target_size=(224, 224)), load_img('images/husky.jpg', target_size=(224, 224))
+img1, img2, img3, img4  = load_img('Mentorship/images/goldfish.jpg', target_size=(224, 224)), load_img('Mentorship/images/bear.jpg', target_size=(224, 224)), load_img('Mentorship/images/soldiers.jpg', target_size=(224, 224)), load_img('Mentorship/images/husky.jpg', target_size=(224, 224))
 images = np.asarray([np.array(img1), np.array(img2), np.array(img3), np.array(img4)]) #Makes array from Images
 
 # Preparing input data for VGG16
@@ -47,7 +47,7 @@ from tf_keras_vis.gradcam import Gradcam #Gradcam
 gradcam = Gradcam(model, model_modifier=model_modifier_function(model), clone=True) #creates an instance of gradcam object with model modifier being replace2linear
 
 # Generate heatmap with GradCAM
-cam = gradcam(score, X, penultimate_layer=7) #creates gradcam heatmap using specified layer
+cam = gradcam(score, X, penultimate_layer=-1) #creates gradcam heatmap using specified layer
 
 # Renders the heat map with the image
 f, ax = plt.subplots(nrows=1, ncols=4, figsize=(12, 4))
