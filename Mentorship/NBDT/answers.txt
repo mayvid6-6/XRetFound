@@ -1,0 +1,31 @@
+Q2: How is the decision tree generated?
+
+A2: 
+"Thus, to prevent overfitting and reflect visual similarity, we build a hierarchy
+using model weights.
+Our hierarchy requires pre-trained model weights. Take row vectors wk : k ∈ [1,K], each
+ representing a class, from the fully-connected layer weights W . Then, run hierarchical
+  agglomerative clustering on the normalized class representatives wk/∥wk∥2. Agglomerative 
+  clustering decides which nodes and groups of nodes are iteratively paired. As described 
+  in Sec 3.1, each leaf node’s weight is a row vector wk ∈ W (Figure 2, Step B) and each 
+  inner node’s weight ni is the average of its leaf node’s weights (Figure 2, Step C). This 
+  hierarchy is the induced hierarchy (Figure 2).
+
+The taxonomy is generated using hierarchical agglomerative clustering, a technique that 
+is described better in the paper. An important thing to note:
+
+- Each Node is not a neural neural as we thought, the tree is actually a soft decision tree
+and those numbers represent probabilities. A key advantage of this approach over a hard
+decision tree is that mistakes are not irrecoverable.
+
+- Instead of using hierarchical softmax to train the hierarchical classifier, they develop tree
+supervision loss. (Don't completely understand) 
+
+
+Q1: How are the nodes of the tree labelled?
+
+A1:
+The nodes are labelled using the wordnet hierarchy. For example: if there are two 
+branches of a node called dog and cat, the node is going to be labelled with wha-
+tever the common parent of those branches is. In this case, it is mammal. The same
+is computed for all other nodes.
